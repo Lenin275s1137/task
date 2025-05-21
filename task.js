@@ -80,6 +80,7 @@ average(arr1)
 // (например можно вставить первый элемент в конец, затем удалить первый элемент)
 
 const arr2 = [1,2,3,4,5]
+console.log(arr2.length, "length")
 
 function castling(arr) {
     arr.push(arr[0])
@@ -138,7 +139,14 @@ function task(str) {
     const newArr = []
     for (let i = 0; i < arr.length; i++) {
         if(arr[i] != arr[i+1]) {
-            newArr.push(arr[i])
+            if (newArr.length > 0) {
+                if(arr[i] != newArr[newArr.length - 1]) {
+                    newArr.push(arr[i])
+                }
+            }
+            else {
+                newArr.push(arr[i])
+            }
         }
         else {
             newArr.push(arr[i])
