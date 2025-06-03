@@ -157,12 +157,12 @@ task(str);
 // task 5
 
 // 1.У нас есть объект:
-let user = { name: "John", years: 30 };
+let user = { name: "John", years: 30, isAdmin: true };
 // let user = {
 //   name: "John",
 //   years: 30
 // };
-const { name: name, years: age, isAdmin: isAdmin } = user;
+const { name, years: age = 0, isAdmin = false } = user;
 console.log(name, age, isAdmin);
 // Напишите деструктурирующее присваивание, которое:
 // свойство name присвоит в переменную name.
@@ -177,25 +177,96 @@ console.log(name, age, isAdmin);
 
 // task 6
 
-let arr = ['John', 'Smit', 'development', 'programmer', 2000];
-const [name1, surname, department, position, salary] = arr
-console.log(name1, surname, department, position, salary)
+let arr = ["John", "Smit", "development", "programmer", 2000];
+const [name1, surname, department, position, salary] = arr;
+// console.log(name1, surname, department, position, salary);
 
 // task 7
 function validatePassword(password) {
-    const arr = password.split('')
-    const num = [1,2,3,4,5,6,7,8,9,0]
-    const lowerCase = "abcdefghijklmnopqrstuvwxyz"
-    const arrUpperCase = lowerCase.toUpperCase().split('')
-    const arrLowerCase = lowerCase.split('')
-    for (let i = 0; i < arr.length; i++) {
-        if (num.includes(arr[i]) && arrLowerCase.includes(arr[i]) && arrUpperCase.includes(arr[i]) && arr.length >= 7) {
-            console.log(true)
-        }
-        else {
-            console.log(false)
-        }
+  const arr = password.split("");
+  console.log(arr);
+  let checkNum = false,
+    checkLow = false,
+    checkUp = false;
+
+  if (arr.length < 8) {
+    return false;
+  }
+  const num = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+  const lowerCase = "abcdefghijklmnopqrstuvwxyz";
+  const arrUpperCase = lowerCase.toUpperCase().split("");
+  const arrLowerCase = lowerCase.split("");
+
+  for (let i = 0; i < arr.length; i++) {
+    if (num.includes(+arr[i])) {
+      checkNum = true;
     }
+    if (arrUpperCase.includes(arr[i])) {
+      checkUp = true;
+    }
+    if (arrLowerCase.includes(arr[i])) {
+      checkLow = true;
+    }
+  }
+
+  // if (checkLow === true && checkNum === true && checkUp === true ) {
+  //   return true
+  // }
+  // else {
+  //   return false
+  // }
+  return checkLow && checkNum && checkUp;
 }
 
-validatePassword('abc4DEFG')
+// console.log(validatePassword("abcg44gDEFG"))
+
+// task 7
+
+function isIpValid(address) {
+  const addArr = address.split(".");
+  let number = [];
+  let test1 = false;
+  let test2 = false;
+  for (let i = 0; i < 256; i++) {
+    number.push(i);
+  }
+  if (addArr.length < 5) {
+    test1 = true;
+  }
+
+  for (let i = 0; i < addArr.length; i++) {
+    if (!number.includes(+addArr[i])) {
+      test2 = true;
+    }
+  }
+  if (test1 === true && test2 === false) {
+    return true;
+  } else {
+    false;
+  }
+  // console.log(test2)
+}
+console.log(isIpValid("192.168.0.01"));
+
+// task 8
+
+const numArr = [1, 2, 3, 4];
+
+const changeArr = numArr.map((el, i) => {
+  return el * i;
+});
+
+console.log(changeArr);
+
+// task 9
+
+const heightBus = 512;
+function checkBusTour(bridges) {
+  for (let i = 0; i < bridges.length; i++) {
+    if (heightBus >= bridges[i]) {
+      return i + 1;
+    }
+  }
+}
+
+console.log(checkBusTour([600, 1512, 43]));
