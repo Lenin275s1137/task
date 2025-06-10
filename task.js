@@ -179,7 +179,7 @@ console.log(name, age, isAdmin);
 
 let arr = ["John", "Smit", "development", "programmer", 2000];
 const [name1, surname, department, position, salary] = arr;
-// console.log(name1, surname, department, position, salary);
+console.log(name1, surname, department, position, salary);
 
 // task 7
 function validatePassword(password) {
@@ -230,22 +230,38 @@ function isIpValid(address) {
   for (let i = 0; i < 256; i++) {
     number.push(i);
   }
-  if (addArr.length < 5) {
-    test1 = true;
+  if (addArr.length != 4) {
+    return false;
   }
-
+  // console.log(number)
   for (let i = 0; i < addArr.length; i++) {
+    console.log(+addArr[i], number.includes(+addArr[i]), test2)
     if (!number.includes(+addArr[i])) {
-      test2 = true;
+      return false
     }
   }
-  if (test1 === true && test2 === false) {
-    return true;
-  } else {
-    false;
-  }
+  // console.log(test1, test2)
+  return true
   // console.log(test2)
 }
+
+function isIpValid2 (address) {
+  const arr = address.split('.')
+  if (arr.length != 4) {
+    return false
+  }
+  for (let i = 0; i < arr.length; i++) {
+    if (+arr[i] >= 0 && +arr[i] < 256) {
+      continue
+    }
+    else {
+      return false
+    }
+    
+  }
+  return true
+}
+
 console.log(isIpValid("192.168.0.01"));
 
 // task 8
@@ -256,7 +272,7 @@ const changeArr = numArr.map((el, i) => {
   return el * i;
 });
 
-console.log(changeArr);
+// console.log(changeArr);
 
 // task 9
 
@@ -269,4 +285,66 @@ function checkBusTour(bridges) {
   }
 }
 
-console.log(checkBusTour([600, 1512, 43]));
+// console.log(checkBusTour([600, 1512, 43]));
+
+// task 10
+
+// Задача 1: Фильтрация + map
+// У вас есть массив пользователей. Получите массив их имён, но только для пользователей старше 27 лет, при этом каждое имя должно быть в верхнем регистре.
+
+const users = [
+  { id: 1, name: 'Alice', age: 25 },
+  { id: 2, name: 'Bob', age: 30 },
+  { id: 3, name: 'Charlie', age: 28 }
+];
+
+const resultUsers = users.filter(el => el.age > 27).map((el) => {
+  return el.name.toUpperCase()
+})
+console.log(resultUsers)
+
+// task 11
+
+// 2.Задача 2: Формат с указанием налога
+// Дан массив цен без налога. 
+// Для каждой цены верните объект с двумя 
+// свойствами: base (исходная цена) и withTax (цена с налогом 20%).
+// Ожидаемый результат:
+// [
+//   { base: 100, withTax: 120 },
+//   { base: 200, withTax: 240 },
+//   { base: 50,  withTax: 60 }
+// ]
+
+const prices = [100, 200, 50];
+const pricesTax = prices.map((el) => {
+  return el*1.2
+})
+const allPrice = []
+const newArr = [...prices,...pricesTax]
+
+for (let i = 0; i < newArr.length; i++) {
+  if (i < newArr.length/2) {
+    allPrice.push({base: prices[i], withTax: prices[i]})
+  }
+}
+
+const endPrices = allPrice.map((obj, i) => {
+  obj.withTax = pricesTax[i]
+})
+
+
+console.log(allPrice)
+
+// task 12
+
+const fruits = ['apple', 'banana', 'cherry', 'kiwi'];
+const newFruits = []
+for (let i = 0; i < fruits.length; i++) {
+    if (fruits[i].length > 5) {
+      newFruits.push('#', i, '=>', fruits[i], ',')
+    }
+}
+const result = newFruits.join('').split(',')
+const del = result.pop()
+console.log(result)
